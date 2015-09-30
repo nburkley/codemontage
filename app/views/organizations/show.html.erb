@@ -53,27 +53,7 @@
 
         <% if @projects.present? %>
           <% @projects.each do |project| %>
-            <div class="row">
-              <div class="large-8 columns">
-                <h5 class="project_title"><%= link_to project.name, project_path(project) %></h5>
-                <ul class="no-bullet">
-                  <li><%= link_to '<i class="fi-social-github"></i> '.html_safe + project.github_display + " Code", project.github_url, :target => '_blank' unless !project.github_url.present? %></li>
-                  <li><%= link_to '<i class="fi-page-edit"></i> '.html_safe + project.name + " Open Tasks", project.tasks_url, :target => '_blank' unless !project.tasks_url.present? %></li>
-                </ul>
-                <p><%= project.description %></p>
-              </div>
-              <div class="large-4 columns">
-                <div id="project_causes">
-                  <h5>Causes</h5>
-                  <%= project_tags_link_list project, 'causes' %>
-                </div>
-
-                <div id="project_technologies">
-                  <h5>Technologies</h5>
-                  <%= project_tags_link_list project, 'technologies' %>
-                </div>
-              </div>
-            </div>
+            <%= render partial: '/projects/project', locals: { project: project } %>
           <% end %>
         <% else %>
           <p>Aww, bummer. There aren't any current projects for this organization. Check out other projects <%= link_to "here", projects_path %>.</p>
